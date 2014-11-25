@@ -38,6 +38,7 @@ Joueur::affiche()
   while ( p != m_pieces.end() )
     {
       (*p)->affiche();
+      cout << (*p)->myCode() << endl;
       p++;
     }
   /*
@@ -59,6 +60,12 @@ Joueur::placerPieces(Echiquier &e)
   for (int i=0; i<16; i++)
   e.placer(m_pieces+i);
   */
+}
+
+vector<Piece*>
+Joueur::getM_Pieces()
+{
+	return m_pieces;
 }
 
 JoueurBlanc::JoueurBlanc() //: Joueur(true)

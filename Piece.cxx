@@ -90,7 +90,7 @@ void
 Piece::affiche()
 {
   cout << "Piece: x=" << m_x << " y=" << m_y << " "
-       << ( m_white ? "blanche" : "noire" ) << endl;
+       << ( m_white ? "B" : "N" ) << endl;
 }
 
 Piece

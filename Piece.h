@@ -46,7 +46,7 @@ class Roi : public Piece
   char myCode();
 };
 
-class Tour : virtual public Piece
+class Tour : public Piece
 {
  public:
   Tour(bool white, bool left);
@@ -54,7 +54,7 @@ class Tour : virtual public Piece
   char myCode();
 };
 
-class Fou : virtual public Piece
+class Fou : public Piece
 {
  public:
   Fou(bool white, bool left);

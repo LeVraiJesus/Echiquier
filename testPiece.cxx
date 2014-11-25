@@ -95,6 +95,16 @@ int main( int argc, char** argv )
 	int xArrive=0;
 	int yArrive=0;
 
+//	int numP = 0;
+//	vector<Piece*>::iterator ip = jb.getM_Pieces().begin();
+//	while(ip != jb.getM_Pieces().end()) {
+//		//cout << numP << endl;
+//		numP++;
+//		ip++;
+//		if(numP>3)
+//			cout<< numP << " > "<< (*ip)->myCode() << endl;
+//	}
+
 	while(!end)
 	{
 		round++;
@@ -103,15 +113,34 @@ int main( int argc, char** argv )
 		cout<<""<<endl;
 		(round%2==1)?(cout<< "Joueur blanc" <<endl):(cout<< "Joueur noir" <<endl);
 
+
+
+		//reselection des 2 positions tant que la case de départ ne comporte pas de piéce valide
+//		selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
+//		if(e.getPiece(xDepart,yDepart)->isWhite())
+//		cout << e.getPiece(xDepart,yDepart) << endl;
+//
 		//reselection des 2 positions tant que la case de départ ne comporte pas de piéce valide
 		selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
-		if(e.getPiece(xDepart,yDepart)->isWhite())
-		cout << e.getPiece(xDepart,yDepart) << endl;
+//
+//		if(e.getPiece(xDepart,yDepart)==jb.getM_Pieces()[0]) {
+//			cout << "piece blanche" << endl;
+//			cout << "piece depart " << e.getPiece(xDepart,yDepart) << endl;
+//		}
+		if(e.getPiece(xDepart,yDepart)==0){
+			cout<<"front"<<endl;
+		}
+		else if((round%2==1)?(false==e.getPiece(xDepart,yDepart)->isWhite()):(true==e.getPiece(xDepart,yDepart)->isWhite())){
+			cout<<"front1"<<endl;
+		}
+
+		//cout<< e.getPiece(xDepart,yDepart)->myCode() << endl;
 
 
-		while(e.getPiece(xDepart,yDepart)==0 || (round%2==1)!=e.getPiece(xDepart,yDepart)->isWhite())
+//
+		while(e.getPiece(xDepart,yDepart)==0 || (round%2==1)?(false==e.getPiece(xDepart,yDepart)->isWhite()):(true==e.getPiece(xDepart,yDepart)->isWhite()))
 			selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
-
+//
 //		e.deplacer(e.getPiece(xDepart,yDepart), xArrive, yArrive);
 
 	}

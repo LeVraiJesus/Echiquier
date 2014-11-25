@@ -30,6 +30,8 @@ class Joueur
   virtual bool isWhite()=0;
   void affiche();
   void placerPieces(Echiquier &e);
+
+  vector<Piece*> getM_Pieces();
 };
 
 class JoueurBlanc : public Joueur
