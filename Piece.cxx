@@ -7,6 +7,7 @@
 #include <iostream>
 // A besoin de la declaration de la classe
 #include "Piece.h"
+#include "Echiquier.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ Piece::Piece(const Piece & autre)
   m_x = autre.m_x;
   m_y = autre.m_y;
   m_white = autre.m_white;
+  nb_mouv = 0;
   //cout << "Constructeur Piece par copie" << endl;
 }
 
@@ -105,6 +107,19 @@ bool
 Piece::mouvementValide(Echiquier &e, int x, int y)
 {
   cout << "Mouvement Valide Piece" << endl;
+  Piece * tmp;
+  //tmp = *e.getPiece(x,y);
+  
+  
+  if(nb_mouv==0){
+	  return true;
+  } else {
+	  return true;
+  }
+//&& (this->isWhite())?(x<=(m_x+2) && x>=m_x):(x>=(m_x-2) && x<=m_x) ) {
+//&& (this->isWhite())?(x<=(m_x+1) && x>=m_x):(x>=(m_x-1) && x<=m_x) ) {
+  nb_mouv ++;
+    
   return false;
 }
 

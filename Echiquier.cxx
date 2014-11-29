@@ -77,8 +77,10 @@ Echiquier::placer( Piece* p )
 bool 
 Echiquier::deplacer( Piece* p, int x, int y )
 {
+	Piece * tmp = enleverPiece(p->x(),p->y());
+	tmp->move(x,y);
+	placer(tmp);
 }
-
 
 /**
  * Enleve la piece situee sur une case (qui devient vide).

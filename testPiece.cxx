@@ -28,15 +28,15 @@ Piece* allouePiece( int x, int y, bool white )
   return ptr; 
 }
 
-void initJeu( JoueurBlanc jb, JoueurNoir jn, Echiquier & e)
+void initJeu( JoueurBlanc * jb, JoueurNoir * jn, Echiquier * e)
 {
-	  jn.affiche();
-	  jb.affiche();
+	  jn->affiche();
+	  jb->affiche();
 
-	  jb.placerPieces(e);
-	  jn.placerPieces(e);
+	  jb->placerPieces(*e);
+	  jn->placerPieces(*e);
 
-	  e.affiche();
+	  e->affiche();
 }
 
 void selectCaseParJoueur(int & xDepart,int & yDepart,int & xArrive,int & yArrive)
@@ -78,11 +78,11 @@ void selectCaseParJoueur(int & xDepart,int & yDepart,int & xArrive,int & yArrive
 int main( int argc, char** argv )
 {
 	//Cr√©ation Joueurs
-	JoueurBlanc jb;
-	JoueurNoir jn;
+	JoueurBlanc * jb = new JoueurBlanc();
+	JoueurNoir * jn = new JoueurNoir();
 
 	//creation echiquier
-	Echiquier e;
+	Echiquier * e = new Echiquier();
 
 	//Initialisation du plateau
 	initJeu(jb,jn,e);
@@ -95,53 +95,37 @@ int main( int argc, char** argv )
 	int xArrive=0;
 	int yArrive=0;
 
-//	int numP = 0;
-//	vector<Piece*>::iterator ip = jb.getM_Pieces().begin();
-//	while(ip != jb.getM_Pieces().end()) {
-//		//cout << numP << endl;
-//		numP++;
-//		ip++;
-//		if(numP>3)
-//			cout<< numP << " > "<< (*ip)->myCode() << endl;
-//	}
-
+	/*cout << jb->getM_Pieces().size() << endl;
+	
+	for(int i=0; i<16; i++){
+		cout << i << " " << jb->getM_Pieces()[i]->myCode() << endl;
+	}*/
+	
 	while(!end)
 	{
 		round++;
-
+		
 		//mise en page du debut de round
 		cout<<""<<endl;
 		(round%2==1)?(cout<< "Joueur blanc" <<endl):(cout<< "Joueur noir" <<endl);
 
-
-
-		//reselection des 2 positions tant que la case de dÈpart ne comporte pas de piÈce valide
-//		selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
-//		if(e.getPiece(xDepart,yDepart)->isWhite())
-//		cout << e.getPiece(xDepart,yDepart) << endl;
-//
 		//reselection des 2 positions tant que la case de dÈpart ne comporte pas de piÈce valide
 		selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
-//
-//		if(e.getPiece(xDepart,yDepart)==jb.getM_Pieces()[0]) {
-//			cout << "piece blanche" << endl;
-//			cout << "piece depart " << e.getPiece(xDepart,yDepart) << endl;
-//		}
-		if(e.getPiece(xDepart,yDepart)==0){
-			cout<<"front"<<endl;
-		}
-		else if((round%2==1)?(false==e.getPiece(xDepart,yDepart)->isWhite()):(true==e.getPiece(xDepart,yDepart)->isWhite())){
-			cout<<"front1"<<endl;
-		}
-
-		//cout<< e.getPiece(xDepart,yDepart)->myCode() << endl;
-
-
-//
-		while(e.getPiece(xDepart,yDepart)==0 || (round%2==1)?(false==e.getPiece(xDepart,yDepart)->isWhite()):(true==e.getPiece(xDepart,yDepart)->isWhite()))
+		if(e->getPiece(xDepart,yDepart)->mouvementValide(*e,xArrive,yArrive))
+			cout << "front" <<endl;
+		while(e->getPiece(xDepart,yDepart)==0 || (round%2==1)?(false==e->getPiece(xDepart,yDepart)->isWhite()):(true==e->getPiece(xDepart,yDepart)->isWhite()))
+		{
 			selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
-//
-//		e.deplacer(e.getPiece(xDepart,yDepart), xArrive, yArrive);
+		}
+		
+		//deplacement de la piece
+		e->deplacer(e->getPiece(xDepart,yDepart), xArrive, yArrive);
 
+		e->affiche();
 	}
+	
+	delete jb;
+	delete jn;
+	delete e;
+	
 }

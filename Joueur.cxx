@@ -56,10 +56,6 @@ Joueur::placerPieces(Echiquier &e)
       e.placer(*p);
       p++;
     }
-  /*
-  for (int i=0; i<16; i++)
-  e.placer(m_pieces+i);
-  */
 }
 
 vector<Piece*>

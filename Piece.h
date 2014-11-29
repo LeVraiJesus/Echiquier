@@ -19,6 +19,7 @@ protected:
   int m_x;
   int m_y;
   bool m_white;
+  int nb_mouv;
   
 public:
   Piece();
@@ -46,7 +47,7 @@ class Roi : public Piece
   char myCode();
 };
 
-class Tour : public Piece
+class Tour : public virtual Piece
 {
  public:
   Tour(bool white, bool left);
@@ -54,7 +55,7 @@ class Tour : public Piece
   char myCode();
 };
 
-class Fou : public Piece
+class Fou : public virtual Piece
 {
  public:
   Fou(bool white, bool left);
