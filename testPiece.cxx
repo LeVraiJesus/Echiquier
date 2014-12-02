@@ -89,7 +89,8 @@ int main( int argc, char** argv )
 
 	//
 	bool end=false;
-	int round=0;
+	bool rndIsWhite=false;
+	int round=1;
 	int xDepart=0;
 	int yDepart=0;
 	int xArrive=0;
@@ -103,24 +104,31 @@ int main( int argc, char** argv )
 	
 	while(!end)
 	{
-		round++;
-		
+		rndIsWhite = (round%2==1);
+
 		//mise en page du debut de round
 		cout<<""<<endl;
-		(round%2==1)?(cout<< "Joueur blanc" <<endl):(cout<< "Joueur noir" <<endl);
+		(rndIsWhite)?(cout<< "Joueur blanc" <<endl):(cout<< "Joueur noir" <<endl);
 
-		//reselection des 2 positions tant que la case de départ ne comporte pas de piéce valide
+
+		//selection des 2 positions tant que la case de départ ne comporte pas de piéce valide
 		selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
-		if(e->getPiece(xDepart,yDepart)->mouvementValide(*e,xArrive,yArrive))
-			cout << "front" <<endl;
-		while(e->getPiece(xDepart,yDepart)==0 || (round%2==1)?(false==e->getPiece(xDepart,yDepart)->isWhite()):(true==e->getPiece(xDepart,yDepart)->isWhite()))
+		while( e->getPiece(xDepart,yDepart)==0 || (rndIsWhite)?(false==e->getPiece(xDepart,yDepart)->isWhite()):(true==e->getPiece(xDepart,yDepart)->isWhite()))
 		{
 			selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
 		}
 		
-		//deplacement de la piece
-		e->deplacer(e->getPiece(xDepart,yDepart), xArrive, yArrive);
 
+		//deplacement de la piece
+		if(e->getPiece(xDepart,yDepart)->mouvementValide(*e,xArrive,yArrive)){
+			e->deplacer(e->getPiece(xDepart,yDepart), xArrive, yArrive);
+			round++;
+		}else{
+			cout << "Veuillez selectionner un mouvement valide" << endl;
+		}
+
+
+		//
 		e->affiche();
 	}
 	

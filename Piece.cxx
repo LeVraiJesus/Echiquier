@@ -103,24 +103,37 @@ Piece::plusforte(const Piece & p) const
   return *this;
 }
 
+
+//** Fonctionnel
 bool
 Piece::mouvementValide(Echiquier &e, int x, int y)
 {
-  cout << "Mouvement Valide Piece" << endl;
-  Piece * tmp;
-  //tmp = *e.getPiece(x,y);
-  
-  
-  if(nb_mouv==0){
-	  return true;
-  } else {
-	  return true;
-  }
-//&& (this->isWhite())?(x<=(m_x+2) && x>=m_x):(x>=(m_x-2) && x<=m_x) ) {
-//&& (this->isWhite())?(x<=(m_x+1) && x>=m_x):(x>=(m_x-1) && x<=m_x) ) {
-  nb_mouv ++;
-    
-  return false;
+	nb_mouv ++;
+	if(this->isWhite()){
+		cout << "pion blanc joue" <<endl;
+		if(nb_mouv==1 && y<=this->m_y+2 && y>=this->m_y ){
+			cout << "Mouvement Valide Pion blanc premier deplacement" << endl;
+			return true;
+		}
+		else if ( y<=this->m_y+1 && y>=this->m_y ) {
+			cout << "Mouvement Valide Pion blanc" << endl;
+			return true;
+		}
+	}
+	if(this->isBlack()){
+		if(nb_mouv==1 && y>=this->m_y-2 && y<=this->m_y ){
+			cout << "Mouvement Valide Pion noir premier deplacement" << endl;
+			return true;
+		}
+		else if ( y>=this->m_y-1 && y<=this->m_y ) {
+			cout << "Mouvement Valide Pion noir" << endl;
+			return true;
+		}
+	}
+
+	nb_mouv --;
+	cout << "Mouvement invalide Pion" << endl;
+	return false;
 }
 
 char
@@ -134,6 +147,8 @@ Roi::Roi(bool white) : Piece(5,(white)?1:8,white)
   //cout << "Constructeur Roi" << endl;
 }
 
+
+//**A tester
 bool
 Roi::mouvementValide(Echiquier &e, int x, int y)
 {
