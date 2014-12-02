@@ -101,7 +101,7 @@ int main( int argc, char** argv )
 	int xArrive=0;
 	int yArrive=0;
 
-	e->deplacer(e->getPiece(1,1),4,4);
+	e->deplacer(e->getPiece(3,1),4,4);
 	e->affiche();
 
     bool selectionOk =false;

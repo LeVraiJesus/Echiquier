@@ -60,7 +60,80 @@ Echiquier::getCaseDirection( int x, int y, int dirX, int dirY )
   if ((x>=1) && (x<=8) && (y>=1) && (y<=8)){
     if((dirX>=-1) && (dirX<=1) && (dirY>=-1) && (dirY<=1)){
         if(dirX!=0 && dirY!=0){//diagonales
-            cout << "diagonale pas implenté" << endl;
+            if(dirX > 0 && dirY > 0)//bas droite
+            {
+                bool end=false;
+                while(!end){
+                    if(tabOut[0]+1>=1 && tabOut[0]+1<=8 && tabOut[1]+1>=1 && tabOut[1]+1<=8) {
+                        tabOut[0]++;
+                        tabOut[1]++;
+                    }
+                    else {
+                        end=true;
+                    }
+
+                    if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
+                        end=true;
+                        tabOut[0]--;
+                        tabOut[1]--;
+                    }
+                }
+                if(tabOut[0]==x&&tabOut[1]==y){return NULL;}else{return tabOut;}
+            } else if(dirX < 0 && dirY > 0) {//bas gauche
+                bool end=false;
+                while(!end){
+                    if(tabOut[0]-1>=1 && tabOut[0]-1<=8 && tabOut[1]+1>=1 && tabOut[1]+1<=8) {
+                        tabOut[0]--;
+                        tabOut[1]++;
+                    }
+                    else {
+                        end=true;
+                    }
+
+                    if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
+                        end=true;
+                        tabOut[0]++;
+                        tabOut[1]--;
+                    }
+                }
+                if(tabOut[0]==x&&tabOut[1]==y){return NULL;}else{return tabOut;}
+            } else if(dirX < 0 && dirY < 0) {//haut gauche
+                bool end=false;
+                while(!end){
+                    if(tabOut[0]-1>=1 && tabOut[0]-1<=8 && tabOut[1]-1>=1 && tabOut[1]-1<=8) {
+                        tabOut[0]--;
+                        tabOut[1]--;
+                    }
+                    else {
+                        end=true;
+                    }
+
+                    if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
+                        end=true;
+                        tabOut[0]++;
+                        tabOut[1]++;
+                    }
+                }
+                if(tabOut[0]==x&&tabOut[1]==y){return NULL;}else{return tabOut;}
+            } else if(dirX > 0 && dirY < 0) {//haut droite
+                bool end=false;
+                while(!end){
+                    if(tabOut[0]+1>=1 && tabOut[0]+1<=8 && tabOut[1]-1>=1 && tabOut[1]-1<=8) {
+                        tabOut[0]++;
+                        tabOut[1]--;
+                    }
+                    else {
+                        end=true;
+                    }
+
+                    if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
+                        end=true;
+                        tabOut[0]--;
+                        tabOut[1]++;
+                    }
+                }
+                if(tabOut[0]==x&&tabOut[1]==y){return NULL;}else{return tabOut;}
+            }
         } else {//Colonnes
             if(dirX!=0){
                 if( dirX < 0){//gauche
