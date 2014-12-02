@@ -209,7 +209,7 @@ Fou::Fou(bool white,bool left) : Piece((left)?3:6,(white)?1:8,white)
   //cout << "Constructeur Fou" << endl;
 }
 
-//**Fonctionnel
+//**Fonctionnel presque
 bool
 Fou::mouvementValide(Echiquier &e, int x, int y)
 {
@@ -243,6 +243,7 @@ Reine::Reine(bool white) : Piece(4,(white)?1:8,white), Tour(white,true), Fou(whi
 {
   //cout << "Constructeur Reine" << endl;
 }
+
 
 bool
 Reine::mouvementValide(Echiquier &e, int x, int y)
