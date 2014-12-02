@@ -101,7 +101,7 @@ int main( int argc, char** argv )
 	int xArrive=0;
 	int yArrive=0;
 
-	e->deplacer(e->getPiece(5,1),5,4);
+	e->deplacer(e->getPiece(1,1),4,4);
 	e->affiche();
 
     bool selectionOk =false;
@@ -133,7 +133,7 @@ int main( int argc, char** argv )
                 selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
                 selectionOk =false;
 		    }else if(e->getPiece(xDepart,yDepart)!=NULL){
-		        if((rndIsWhite)?(e->getPiece(xDepart,yDepart)->isWhite()):(e->getPiece(xDepart,yDepart)->isWhite()))
+		        if((rndIsWhite)?(e->getPiece(xDepart,yDepart)->isWhite()):(!e->getPiece(xDepart,yDepart)->isWhite()))
                 {
                     selectionOk = true;
                 }else{

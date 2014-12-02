@@ -148,7 +148,7 @@ Roi::Roi(bool white) : Piece(5,(white)?1:8,white)
 }
 
 
-//**A tester
+//**Fonctionnel
 bool
 Roi::mouvementValide(Echiquier &e, int x, int y)
 {
@@ -174,11 +174,28 @@ Tour::Tour(bool white,bool left) : Piece((left)?1:8,(white)?1:8,white)
  // cout << "Constructeur Tour" << endl;
 }
 
+//**Fonctionnel
 bool
 Tour::mouvementValide(Echiquier &e, int x, int y)
 {
-  cout << "Mouvement Valide Tour" << endl;
-  return false;
+    int * out = NULL;
+
+    if(x>this->m_x && y==this->m_y)
+        out = e.getCaseDirection(this->m_x,this->m_y,1,0);
+    else if(x<this->m_x && y==this->m_y)
+        out = e.getCaseDirection(this->m_x,this->m_y,-1,0);
+    else if(x==this->m_x && y>this->m_y){
+        out = e.getCaseDirection(this->m_x,this->m_y,0,1);
+    }else if(x==this->m_x && y<this->m_y)
+        out = e.getCaseDirection(this->m_x,this->m_y,0,-1);
+
+    if(out!=NULL){
+        cout << "Mouvement Valide Tour, max : " << out[0] << " " << out[1] << endl;
+        return true;
+    }
+
+    cout << "Mouvement Invalide Tour" << endl;
+    return false;
 }
 
 char

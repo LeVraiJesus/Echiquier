@@ -1,4 +1,4 @@
-/** 
+/**
  * Header de Echiquier.cxx
  *
  * @file Echiquier.h
@@ -12,14 +12,14 @@
 /**
  * Declaration d'une classe modélisant une piece de jeu d'echec.
  */
-class Echiquier 
+class Echiquier
 {
 private:
   /**
    * Les cases de l'echiquier
    */
   Piece* m_cases[ 64 ];
-  
+
 public:
 
   /**
@@ -38,7 +38,21 @@ public:
    * vers une piece sinon.
    */
   Piece* getPiece( int x, int y );
-  
+
+  /**
+  * renvoi la case la plus éloigner accessible
+  * depuis une position initial dans la direction voulu
+  *
+  * @param x un entier entre 1 et 8
+  * @param y un entier entre 1 et 8
+  * @param dirX un entier entre 1 et -1
+  * @param dirY un entier entre 1 et -1
+  *
+  * @return 0 si aucune case n'est disponible dans cette
+  * direction retourne un tableau de 2 entier x et y.
+  */
+  int* getCaseDirection( int x, int y, int dirX, int dirY );
+
   /**
    * Place une piece sur l'echiquier, aux coordonnees specifiees dans la piece.
    *
@@ -51,7 +65,7 @@ public:
 
   /**
    * Deplace une piece sur l'echiquier, des coordonnees specifiees
-   * dans la piece aux coordonnees x,y. 
+   * dans la piece aux coordonnees x,y.
    *
    * @param p un pointeur vers une piece
    * @param x un entier entre 1 et 8
@@ -80,7 +94,7 @@ public:
    * blanches et N pour les pieces noires.
    */
   void affiche();
-  
+
 };
 
 #endif // !defined Echiquier_h
