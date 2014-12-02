@@ -52,21 +52,41 @@ Echiquier::getPiece( int x, int y )
  * direction retourne un tableau de 2 entier x et y.
  */
 int*
-Echiquier::getCaseDirection( int x, int y, int dirX, int dirY )
+Echiquier::getCaseDirection( int x, int y, int aX, int aY )
 {
   int* tabOut = new int[2];
   tabOut[0] = x;
   tabOut[1] = y;
+  int dirX;
+  int dirY;
+
+  if( aX > x )
+	  dirX = 1;
+  else if( aX == x)
+	  dirX = 0;
+  else if( aX < x )
+	  dirX = -1;
+
+  if( aY > y )
+	  dirY = 1;
+  else if( aY == y)
+	  dirY = 0;
+  else if( aY < y )
+	  dirY = -1;
+
   if ((x>=1) && (x<=8) && (y>=1) && (y<=8)){
     if((dirX>=-1) && (dirX<=1) && (dirY>=-1) && (dirY<=1)){
         if(dirX!=0 && dirY!=0){//diagonales
             if(dirX > 0 && dirY > 0)//bas droite
             {
                 bool end=false;
+                bool goodMove=false;
                 while(!end){
                     if(tabOut[0]+1>=1 && tabOut[0]+1<=8 && tabOut[1]+1>=1 && tabOut[1]+1<=8) {
                         tabOut[0]++;
                         tabOut[1]++;
+                        if( tabOut[0]==aX && tabOut[1]==aY )
+                        	goodMove=true;
                     }
                     else {
                         end=true;
@@ -78,13 +98,16 @@ Echiquier::getCaseDirection( int x, int y, int dirX, int dirY )
                         tabOut[1]--;
                     }
                 }
-                if(tabOut[0]==x&&tabOut[1]==y){return NULL;}else{return tabOut;}
+                if((tabOut[0]==x&&tabOut[1]==y)||(!goodMove)){return NULL;}else{return tabOut;}
             } else if(dirX < 0 && dirY > 0) {//bas gauche
                 bool end=false;
+                bool goodMove=false;
                 while(!end){
                     if(tabOut[0]-1>=1 && tabOut[0]-1<=8 && tabOut[1]+1>=1 && tabOut[1]+1<=8) {
                         tabOut[0]--;
                         tabOut[1]++;
+                        if( tabOut[0]==aX && tabOut[1]==aY )
+                        	goodMove=true;
                     }
                     else {
                         end=true;
@@ -96,13 +119,16 @@ Echiquier::getCaseDirection( int x, int y, int dirX, int dirY )
                         tabOut[1]--;
                     }
                 }
-                if(tabOut[0]==x&&tabOut[1]==y){return NULL;}else{return tabOut;}
+                if((tabOut[0]==x&&tabOut[1]==y)||(!goodMove)){return NULL;}else{return tabOut;}
             } else if(dirX < 0 && dirY < 0) {//haut gauche
                 bool end=false;
+                bool goodMove=false;
                 while(!end){
                     if(tabOut[0]-1>=1 && tabOut[0]-1<=8 && tabOut[1]-1>=1 && tabOut[1]-1<=8) {
                         tabOut[0]--;
                         tabOut[1]--;
+                        if( tabOut[0]==aX && tabOut[1]==aY )
+                        	goodMove=true;
                     }
                     else {
                         end=true;
@@ -114,13 +140,16 @@ Echiquier::getCaseDirection( int x, int y, int dirX, int dirY )
                         tabOut[1]++;
                     }
                 }
-                if(tabOut[0]==x&&tabOut[1]==y){return NULL;}else{return tabOut;}
+                if((tabOut[0]==x&&tabOut[1]==y)||(!goodMove)){return NULL;}else{return tabOut;}
             } else if(dirX > 0 && dirY < 0) {//haut droite
                 bool end=false;
+                bool goodMove=false;
                 while(!end){
                     if(tabOut[0]+1>=1 && tabOut[0]+1<=8 && tabOut[1]-1>=1 && tabOut[1]-1<=8) {
                         tabOut[0]++;
                         tabOut[1]--;
+                        if( tabOut[0]==aX && tabOut[1]==aY )
+                        	goodMove=true;
                     }
                     else {
                         end=true;
@@ -132,7 +161,7 @@ Echiquier::getCaseDirection( int x, int y, int dirX, int dirY )
                         tabOut[1]++;
                     }
                 }
-                if(tabOut[0]==x&&tabOut[1]==y){return NULL;}else{return tabOut;}
+                if((tabOut[0]==x&&tabOut[1]==y)||(!goodMove)){return NULL;}else{return tabOut;}
             }
         } else {//Colonnes
             if(dirX!=0){

@@ -180,14 +180,17 @@ Tour::mouvementValide(Echiquier &e, int x, int y)
 {
     int * out = NULL;
 
-    if(x>this->m_x && y==this->m_y)
-        out = e.getCaseDirection(this->m_x,this->m_y,1,0);
-    else if(x<this->m_x && y==this->m_y)
-        out = e.getCaseDirection(this->m_x,this->m_y,-1,0);
-    else if(x==this->m_x && y>this->m_y){
-        out = e.getCaseDirection(this->m_x,this->m_y,0,1);
-    }else if(x==this->m_x && y<this->m_y)
-        out = e.getCaseDirection(this->m_x,this->m_y,0,-1);
+    if( (x>this->m_x && y==this->m_y) || (x<this->m_x && y==this->m_y) || (x==this->m_x && y>this->m_y) || (x==this->m_x && y<this->m_y) )
+    	out = e.getCaseDirection(this->m_x,this->m_y,x,y);
+
+//    if(x>this->m_x && y==this->m_y)
+//        out = e.getCaseDirection(this->m_x,this->m_y,1,0);
+//    else if(x<this->m_x && y==this->m_y)
+//        out = e.getCaseDirection(this->m_x,this->m_y,-1,0);
+//    else if(x==this->m_x && y>this->m_y){
+//        out = e.getCaseDirection(this->m_x,this->m_y,0,1);
+//    }else if(x==this->m_x && y<this->m_y)
+//        out = e.getCaseDirection(this->m_x,this->m_y,0,-1);
 
     if(out!=NULL){
         cout << "Mouvement Valide Tour, max : " << out[0] << " " << out[1] << endl;
@@ -214,15 +217,17 @@ bool
 Fou::mouvementValide(Echiquier &e, int x, int y)
 {
     int * out = NULL;
+    if((x>this->m_x && y>this->m_y) || (x<this->m_x && y>this->m_y) || (x<this->m_x && y<this->m_y) || (x>this->m_x && y<this->m_y))
+    	out = e.getCaseDirection(this->m_x,this->m_y,x,y);
 
-    if(x>this->m_x && y>this->m_y)
-        out = e.getCaseDirection(this->m_x,this->m_y,1,1);
-    else if(x<this->m_x && y>this->m_y)
-        out = e.getCaseDirection(this->m_x,this->m_y,-1,1);
-    else if(x<this->m_x && y<this->m_y){
-        out = e.getCaseDirection(this->m_x,this->m_y,-1,-1);
-    }else if(x>this->m_x && y<this->m_y)
-        out = e.getCaseDirection(this->m_x,this->m_y,1,-1);
+//    if(x>this->m_x && y>this->m_y)
+//        out = e.getCaseDirection(this->m_x,this->m_y,1,1);
+//    else if(x<this->m_x && y>this->m_y)
+//        out = e.getCaseDirection(this->m_x,this->m_y,-1,1);
+//    else if(x<this->m_x && y<this->m_y){
+//        out = e.getCaseDirection(this->m_x,this->m_y,-1,-1);
+//    }else if(x>this->m_x && y<this->m_y)
+//        out = e.getCaseDirection(this->m_x,this->m_y,1,-1);
 
     if(out!=NULL){
         cout << "Mouvement Valide Fou, max : " << out[0] << " " << out[1] << endl;
