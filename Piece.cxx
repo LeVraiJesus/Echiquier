@@ -1,4 +1,4 @@
-/** 
+/**
  * Mise en oeuvre de Piece.h
  *
  * @file Piece.cxx
@@ -152,8 +152,15 @@ Roi::Roi(bool white) : Piece(5,(white)?1:8,white)
 bool
 Roi::mouvementValide(Echiquier &e, int x, int y)
 {
-  cout << "Mouvement Valide Roi" << endl;
-  return false;
+    if( x>=this->m_x-1 && x<=this->m_x+1 && y>=this->m_y-1 && y<=this->m_y+1){
+        cout << "Mouvement Valide Roi ";
+        (this->m_white)?(cout << "Blanc"<< endl):(cout << "Noir"<< endl);
+        return true;
+    }
+
+    cout << "Mouvement Invalide Roi ";
+    (this->m_white)?(cout << "Blanc"<< endl):(cout << "Noir"<< endl);
+    return false;
 }
 
 char

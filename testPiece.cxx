@@ -1,4 +1,4 @@
-/** 
+/**
  * Programme test de Piece
  *
  * @file testPiece.cxx
@@ -25,7 +25,7 @@ bool compare(Piece p, Piece q)
 Piece* allouePiece( int x, int y, bool white )
 {
   Piece* ptr = new Piece( x, y, white );
-  return ptr; 
+  return ptr;
 }
 
 void initJeu( JoueurBlanc * jb, JoueurNoir * jn, Echiquier * e)
@@ -49,12 +49,17 @@ void selectCaseParJoueur(int & xDepart,int & yDepart,int & xArrive,int & yArrive
 		cout << "Entrez la case de depart a selectionner (votre piece)" << endl;
 		cin >> posCin;
 
-		(posCin<11 || posCin>88)?enter=false:enter=true;
+		if(posCin<11 || posCin>88){
+		    enter=false;
+        }else {
+            xDepart=(posCin/10)%10;
+            yDepart=posCin%10;
+            enter=true;
+        }
 
 		(posCin<11 || posCin>88)?cout << "position hors map" <<endl:cout << ""<<endl;
 
-		xDepart=(posCin/10)%10;
-		yDepart=posCin%10;
+
 	}
 
 	//Boucle selectionnement de case d'arrive
@@ -96,15 +101,19 @@ int main( int argc, char** argv )
 	int xArrive=0;
 	int yArrive=0;
 
-	/*cout << jb->getM_Pieces().size() << endl;
-	
-	for(int i=0; i<16; i++){
-		cout << i << " " << jb->getM_Pieces()[i]->myCode() << endl;
-	}*/
-	
+	e->deplacer(e->getPiece(5,1),5,4);
+	e->affiche();
+
+    bool selectionOk =false;
+
 	while(!end)
 	{
+	    //Affectation variable de jeu
 		rndIsWhite = (round%2==1);
+
+        xDepart = 0;
+        yDepart = 0;
+        selectionOk =false;
 
 		//mise en page du debut de round
 		cout<<""<<endl;
@@ -112,12 +121,28 @@ int main( int argc, char** argv )
 
 
 		//selection des 2 positions tant que la case de départ ne comporte pas de piéce valide
-		selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
-		while( e->getPiece(xDepart,yDepart)==0 || (rndIsWhite)?(false==e->getPiece(xDepart,yDepart)->isWhite()):(true==e->getPiece(xDepart,yDepart)->isWhite()))
+		while( !selectionOk )
 		{
-			selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
+		    if( xDepart == 0 && yDepart ==0 )
+            {
+                selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
+            }
+
+		    if(e->getPiece(xDepart,yDepart)==NULL){
+                cout << "Aucune piece selectionne" << endl;
+                selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
+                selectionOk =false;
+		    }else if(e->getPiece(xDepart,yDepart)!=NULL){
+		        if((rndIsWhite)?(e->getPiece(xDepart,yDepart)->isWhite()):(e->getPiece(xDepart,yDepart)->isWhite()))
+                {
+                    selectionOk = true;
+                }else{
+                    cout << "Cette piece n'est pas dans votre jeu" << endl;
+                    selectionOk =false;
+                }
+		    }
 		}
-		
+
 
 		//deplacement de la piece
 		if(e->getPiece(xDepart,yDepart)->mouvementValide(*e,xArrive,yArrive)){
@@ -131,9 +156,9 @@ int main( int argc, char** argv )
 		//
 		e->affiche();
 	}
-	
+
 	delete jb;
 	delete jn;
 	delete e;
-	
+
 }
