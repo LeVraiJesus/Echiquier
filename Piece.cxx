@@ -286,8 +286,23 @@ Cavalier::Cavalier(bool white, bool left) : Piece((left)?2:7,(white)?1:8,white),
 bool
 Cavalier::mouvementValide(Echiquier &e, int x, int y)
 {
-	 cout << "Mouvement Valide Cavalier" << endl;
-	 return true;
+	if( (x == this->m_x+1 && y == this->m_y-2) ||//**Haut droit
+		(x == this->m_x+2 && y == this->m_y-1) ||
+
+		(x == this->m_x+2 && y == this->m_y+1) ||//**Bas droit
+		(x == this->m_x+1 && y == this->m_y+2) ||
+
+		(x == this->m_x-1 && y == this->m_y+2) ||//**Bas Gauche
+		(x == this->m_x-2 && y == this->m_y+1) ||
+
+		(x == this->m_x-2 && y == this->m_y-1) ||//**Haut Gauche
+		(x == this->m_x-1 && y == this->m_y-2)	)
+	{
+		cout << "Mouvement Valide Cavalier" << endl;
+		return true;
+	}
+	cout << "Mouvement Invalide Cavalier" << endl;
+	return false;
 }
 
 char
