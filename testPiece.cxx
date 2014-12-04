@@ -101,28 +101,27 @@ int main( int argc, char** argv )
 	int xArrive=0;
 	int yArrive=0;
 
-	e->deplacer(e->getPiece(3,1),4,4);
-	e->affiche();
-
     bool selectionOk =false;
 
 	while(!end)
 	{
-	    //Affectation variable de jeu
+	    //**Affectation variable de jeu
 		rndIsWhite = (round%2==1);
 
         xDepart = 0;
         yDepart = 0;
         selectionOk =false;
+        //
 
-		//mise en page du debut de round
+		//**Mise en page du debut de round
 		cout<<""<<endl;
 		(rndIsWhite)?(cout<< "Joueur blanc" <<endl):(cout<< "Joueur noir" <<endl);
+		//
 
-
-		//selection des 2 positions tant que la case de départ ne comporte pas de piéce valide
+		//**selection des 2 positions tant que la case de départ ne comporte pas de piéce valide
 		while( !selectionOk )
 		{
+			//Premier tour de boucle
 		    if( xDepart == 0 && yDepart ==0 )
             {
                 selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
@@ -133,8 +132,7 @@ int main( int argc, char** argv )
                 selectCaseParJoueur(xDepart,yDepart,xArrive,yArrive);
                 selectionOk =false;
 		    }else if(e->getPiece(xDepart,yDepart)!=NULL){
-		        if((rndIsWhite)?(e->getPiece(xDepart,yDepart)->isWhite()):(!e->getPiece(xDepart,yDepart)->isWhite()))
-                {
+		        if((rndIsWhite)?(e->getPiece(xDepart,yDepart)->isWhite()):(!e->getPiece(xDepart,yDepart)->isWhite())){
                     selectionOk = true;
                 }else{
                     cout << "Cette piece n'est pas dans votre jeu" << endl;
@@ -142,18 +140,20 @@ int main( int argc, char** argv )
                 }
 		    }
 		}
+		//
 
-
-		//deplacement de la piece
+		//**Deplacement de la piece
 		if(e->getPiece(xDepart,yDepart)->mouvementValide(*e,xArrive,yArrive)){
+			if(e->getPiece(xArrive,yArrive)!=NULL)
+				cout << e->enleverPiece(xArrive,yArrive)->myCode() << ((e->getPiece(xDepart,yDepart)->isWhite())?(" blanc a ete detruite"):(" noir a ete detruite")) << endl;
 			e->deplacer(e->getPiece(xDepart,yDepart), xArrive, yArrive);
 			round++;
 		}else{
 			cout << "Veuillez selectionner un mouvement valide" << endl;
 		}
-
-
 		//
+
+		//**Affichage
 		e->affiche();
 	}
 

@@ -46,6 +46,7 @@ Piece::Piece( int x, int y, bool white )
   m_x = x;
   m_y = y;
   m_white = white;
+  nb_mouv = 0;
   //cout << "Constructeur Piece specialise" << endl;
 }
 
@@ -55,6 +56,7 @@ Piece::init( int x, int y, bool white )
   m_x = x;
   m_y = y;
   m_white = white;
+  nb_mouv = 0;
 }
 
 void
@@ -106,32 +108,66 @@ Piece::plusforte(const Piece & p) const
 bool
 Piece::mouvementValide(Echiquier &e, int x, int y)
 {
-	nb_mouv ++;
-	if(this->isWhite()){
-		cout << "pion blanc joue" <<endl;
-		if(nb_mouv==1 && y<=this->m_y+2 && y>=this->m_y ){
-			cout << "Mouvement Valide Pion blanc premier deplacement" << endl;
-			return true;
+	this->nb_mouv ++;
+	if(e.getPiece(x,y)==NULL){
+		if(this->isWhite()){
+			cout << "white" << this->nb_mouv << endl;
+			if(nb_mouv==1 && y<=this->m_y+2 && y>=this->m_y && x==this->m_x){
+				cout << "Mouvement Valide Pion blanc premier deplacement" << endl;
+				return true;
+			}
+			else if ( y<=this->m_y+1 && y>=this->m_y && x==this->m_x) {
+				cout << "Mouvement Valide Pion blanc" << endl;
+				return true;
+			}
 		}
-		else if ( y<=this->m_y+1 && y>=this->m_y ) {
-			cout << "Mouvement Valide Pion blanc" << endl;
-			return true;
+		if(this->isBlack()){
+			cout << "black" << this->nb_mouv << endl;
+			if(nb_mouv==1 && y>=this->m_y-2 && y<=this->m_y && x==this->m_x){
+				cout << "Mouvement Valide Pion noir premier deplacement" << endl;
+				return true;
+			}
+			else if ( y>=this->m_y-1 && y<=this->m_y && x==this->m_x) {
+				cout << "Mouvement Valide Pion noir" << endl;
+				return true;
+			}
 		}
-	}
-	if(this->isBlack()){
-		if(nb_mouv==1 && y>=this->m_y-2 && y<=this->m_y ){
-			cout << "Mouvement Valide Pion noir premier deplacement" << endl;
-			return true;
+	}else if(e.getPiece(x,y)!=NULL){
+		cout<< "is not null"<< endl;
+		if(this->isWhite()){
+			if(y==this->m_y+1 && x==this->m_x+1){
+				if(this->m_x+1<=8 && this->m_y+1<=8){
+					cout << "Mouvement Valide Pion blanc diagonale droite" << endl;
+					return true;
+				}
+			}
+			else if(y==this->m_y+1 && x==this->m_x-1){
+				if(this->m_x-1>=1 && this->m_y+1<=8){
+					cout << "Mouvement Valide Pion blanc diagonale gauche" << endl;
+					return true;
+				}
+			}
 		}
-		else if ( y>=this->m_y-1 && y<=this->m_y ) {
-			cout << "Mouvement Valide Pion noir" << endl;
-			return true;
+		if(this->isBlack()){
+			if(y==this->m_y-1 && x>=this->m_x+1){
+				if(this->m_x+1<=8 && this->m_y-1>=1){
+					cout << "Mouvement Valide Pion noir diagonale droite" << endl;
+					return true;
+				}
+			}else if(y==this->m_y-1 && x>=this->m_x-1){
+				if(this->m_x-1>=1 && this->m_y-1>=1){
+					cout << "Mouvement Valide Pion noir diagonale gauche" << endl;
+					return true;
+				}
+			}
 		}
 	}
 
-	nb_mouv --;
+	this->nb_mouv --;
 	cout << "Mouvement invalide Pion" << endl;
+	cout << "fin" << this->nb_mouv << endl;
 	return false;
+
 }
 
 char

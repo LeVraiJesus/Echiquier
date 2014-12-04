@@ -45,8 +45,8 @@ Echiquier::getPiece( int x, int y )
  *
  * @param x un entier entre 1 et 8
  * @param y un entier entre 1 et 8
- * @param dirX un entier entre 1 et -1
- * @param dirY un entier entre 1 et -1
+ * @param aX un entier entre 1 et 8
+ * @param aY un entier entre 1 et 8
  *
  * @return 0 si aucune case n'est disponible dans cette
  * direction retourne un tableau de 2 entier x et y.
@@ -94,8 +94,8 @@ Echiquier::getCaseDirection( int x, int y, int aX, int aY )
 
                     if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
                         end=true;
-                        tabOut[0]--;
-                        tabOut[1]--;
+//                        tabOut[0]--;
+//                        tabOut[1]--;
                     }
                 }
                 if((tabOut[0]==x&&tabOut[1]==y)||(!goodMove)){return NULL;}else{return tabOut;}
@@ -115,8 +115,8 @@ Echiquier::getCaseDirection( int x, int y, int aX, int aY )
 
                     if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
                         end=true;
-                        tabOut[0]++;
-                        tabOut[1]--;
+//                        tabOut[0]++;
+//                        tabOut[1]--;
                     }
                 }
                 if((tabOut[0]==x&&tabOut[1]==y)||(!goodMove)){return NULL;}else{return tabOut;}
@@ -136,8 +136,8 @@ Echiquier::getCaseDirection( int x, int y, int aX, int aY )
 
                     if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
                         end=true;
-                        tabOut[0]++;
-                        tabOut[1]++;
+//                        tabOut[0]++;
+//                        tabOut[1]++;
                     }
                 }
                 if((tabOut[0]==x&&tabOut[1]==y)||(!goodMove)){return NULL;}else{return tabOut;}
@@ -157,8 +157,8 @@ Echiquier::getCaseDirection( int x, int y, int aX, int aY )
 
                     if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
                         end=true;
-                        tabOut[0]--;
-                        tabOut[1]++;
+//                        tabOut[0]--;
+//                        tabOut[1]++;
                     }
                 }
                 if((tabOut[0]==x&&tabOut[1]==y)||(!goodMove)){return NULL;}else{return tabOut;}
@@ -176,7 +176,7 @@ Echiquier::getCaseDirection( int x, int y, int aX, int aY )
 
                         if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
                             end=true;
-                            tabOut[0]++;
+//                            tabOut[0]++;
                         }
                     }
                     if(tabOut[0]==x){return NULL;}else{return tabOut;}
@@ -191,7 +191,7 @@ Echiquier::getCaseDirection( int x, int y, int aX, int aY )
 
                         if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
                             end=true;
-                            tabOut[0]--;
+//                            tabOut[0]--;
                         }
                     }
                     if(tabOut[0]==x){return NULL;}else{return tabOut;}
@@ -207,7 +207,7 @@ Echiquier::getCaseDirection( int x, int y, int aX, int aY )
                         }
 
                         if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
-                            tabOut[1]++;
+//                            tabOut[1]++;
                             end=true;
                         }
                     }
@@ -223,7 +223,7 @@ Echiquier::getCaseDirection( int x, int y, int aX, int aY )
 
                         if(this->getPiece(tabOut[0],tabOut[1])!=NULL){
                             end=true;
-                            tabOut[1]--;
+//                            tabOut[1]--;
                         }
                     }
                     if(tabOut[1]==y){return NULL;}else{return tabOut;}
